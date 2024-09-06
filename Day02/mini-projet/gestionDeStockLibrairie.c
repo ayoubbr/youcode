@@ -127,14 +127,14 @@ int main() {
                 printf("Aucun livre disponible.\n");
             } else {
                 long nombre_total = 0;
-                
+
                 // Parcourir pour calculer le nombre total des livres dans le stock
                 for (int i = 0; i < nombre_livre ; i++) {
                     nombre_total += quantite_livre[i];
                 }
                 printf("Nombre total des Livres dans le stock est :%d \n", nombre_total);
             }
-        }else if (choix == 6) {
+        } else if (choix == 6) {
             printf("Quitter...\n");
         } else {
             printf("Option invalide. Veuillez réessayer.\n");
