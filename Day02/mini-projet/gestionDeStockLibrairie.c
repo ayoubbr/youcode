@@ -20,6 +20,7 @@ int main() {
         printf("2. Afficher la liste des livres\n");
         printf("3. Modifier la quantite d'un livre\n");
         printf("4. Supprimer un livre\n");
+        printf("5. Calculer la quantite des livres dans le stock\n");
         printf("6. Quitter\n");
         printf("Choisissez une option: ");
         scanf("%d", &choix);
@@ -121,8 +122,18 @@ int main() {
                 }
             }
         }else if (choix == 5){
-            printf("- Le programme calcule et affiche le nombre total de livres en stock, en additionnant les quantités de tous les livres.")
-            printf("to be done tomorrow");
+            // nombre total de livres en stock
+             if (nombre_livre == 0) {
+                printf("Aucun livre disponible.\n");
+            } else {
+                long nombre_total = 0;
+                
+                // Parcourir pour calculer le nombre total des livres dans le stock
+                for (int i = 0; i < nombre_livre ; i++) {
+                    nombre_total += quantite_livre[i];
+                }
+                printf("Nombre total des Livres dans le stock est :%d \n", nombre_total);
+            }
         }else if (choix == 6) {
             printf("Quitter...\n");
         } else {
