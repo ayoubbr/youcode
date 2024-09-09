@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <string.h>
 
-struct Rectangle
+typedef struct 
 {
     int largeur;
     int longueur;
-};
+}Rectangle;
 
-float air(struct Rectangle r){
+float air(Rectangle r){
     return r.largeur * r.longueur;
 }
 
 int main()
 {
-    struct Rectangle rect;
+    Rectangle rect;
 
     rect.largeur = 14;
     rect.longueur = 2;

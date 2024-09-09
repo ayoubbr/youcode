@@ -5,18 +5,9 @@ float prix_livre[MAX_LIVRES];
 int quantite_livre[MAX_LIVRES];
 int nombre_livre = 0; 
 int choix = 0;
- // Initialisation à 0
+
 int main()
 {
-
-    // char titre_livre[MAX_LIVRES][MAX_TITRE];
-    // char auteur_livre[MAX_LIVRES][MAX_TITRE];
-    // float prix_livre[MAX_LIVRES];
-    // int quantite_livre[MAX_LIVRES];
-
-    // int choix = 0;
-    // int nombre_livre = 0;
-
     while (choix != 6)
     {
         printf("\n--- Menu ---\n");

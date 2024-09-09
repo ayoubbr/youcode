@@ -20,7 +20,7 @@ void ajouterLivre(char titre_livre[][MAX_TITRE], char auteur_livre[][MAX_TITRE],
         printf("Quantite du livre: ");
         scanf("%d", &quantite_livre[nombre_livre]);
 
-        printf("Livre ajouté avec succès !\n");
+        printf("Livre ajoute avec succss !\n");
     }
 }
 
@@ -39,7 +39,7 @@ void afficherLivres(char titre_livre[][MAX_TITRE], char auteur_livre[][MAX_TITRE
             printf("Titre: %s\n", titre_livre[i]);
             printf("Auteur: %s\n", auteur_livre[i]);
             printf("Prix: %.2f\n", prix_livre[i]);
-            printf("Quantité: %d\n", quantite_livre[i]);
+            printf("Quantite: %d\n", quantite_livre[i]);
             printf("-----------------------\n");
         }
     }
@@ -67,7 +67,7 @@ void modifierQuantite(char titre_livre[][MAX_TITRE], int quantite_livre[], int n
                 printf("Ancienne quantité: %d\n", quantite_livre[i]);
                 printf("Nouvelle quantité: ");
                 scanf("%d", &quantite_livre[i]);
-                printf("Quantité mise à jour avec succès !\n");
+                printf("Quantite mise à jour avec succes !\n");
                 trouve = 1;
                 break;
             }
@@ -75,7 +75,7 @@ void modifierQuantite(char titre_livre[][MAX_TITRE], int quantite_livre[], int n
 
         if (!trouve)
         {
-            printf("Livre non trouvé dans le stock.\n");
+            printf("Livre non trouve dans le stock.\n");
         }
     }
 }
@@ -98,7 +98,7 @@ void supprimerLivre(char titre_livre[][MAX_TITRE], char auteur_livre[][MAX_TITRE
         {
             if (strcmp(titre_livre[i], titreRecherche) == 0)
             {
-                printf("Livre trouvé : %s\n", titre_livre[i]);
+                printf("Livre trouve : %s\n", titre_livre[i]);
                 for (int j = i; j < nombre_livre - 1; j++)
                 {
                     strcpy(titre_livre[j], titre_livre[j + 1]);
@@ -106,7 +106,7 @@ void supprimerLivre(char titre_livre[][MAX_TITRE], char auteur_livre[][MAX_TITRE
                     prix_livre[j] = prix_livre[j + 1];
                     quantite_livre[j] = quantite_livre[j + 1];
                 }
-                printf("Livre supprimé avec succès !\n");
+                printf("Livre supprime avec succes !\n");
                 trouve = 1;
                 break;
             }
@@ -114,7 +114,7 @@ void supprimerLivre(char titre_livre[][MAX_TITRE], char auteur_livre[][MAX_TITRE
 
         if (!trouve)
         {
-            printf("Livre non trouvé dans le stock.\n");
+            printf("Livre non trouve dans le stock.\n");
         }
     }
 }
