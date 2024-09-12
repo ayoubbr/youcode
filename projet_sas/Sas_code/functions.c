@@ -154,36 +154,47 @@ void calculer_moyenne(Etudiant e[], int *nombre_etudiants)
     }
     else
     {
-        char departement_cherche[50];
-        float somme = 0;
-        int nbEtudiantsDepartement = 0;
+        char list_of_departements[100][50];
+        float somme_par_departement[100] = {0};
+        int nombre_etudiants_par_departement[100] = {0};
+        int dep_conteur = 0;
         float somme_total = 0;
-
-        printf("Entrez le departement que vous voulez calculer la moyenne generale: ");
-        scanf("%s", departement_cherche);
-        printf("---------------------------------------------\n");
 
         for (int i = 0; i < *nombre_etudiants; i++)
         {
             somme_total += e[i].note;
-            if (strcasecmp(e[i].departement, departement_cherche) == 0)
+
+            // Vérifier si le département existe dans la liste
+            int j;
+            for (j = 0; j < dep_conteur; j++)
             {
-                somme += e[i].note;
-                nbEtudiantsDepartement++;
+                if (strcasecmp(e[i].departement, list_of_departements[j]) == 0)
+                {
+                    somme_par_departement[j] += e[i].note; 
+                    nombre_etudiants_par_departement[j]++;
+                    break;
+                }
+            }
+
+            // Si le département n'existe pas, et ajouter
+            if (j == dep_conteur)
+            {
+                strcpy(list_of_departements[dep_conteur], e[i].departement);
+                somme_par_departement[dep_conteur] = e[i].note;
+                nombre_etudiants_par_departement[dep_conteur] = 1;
+                dep_conteur++;
             }
         }
-        if (nbEtudiantsDepartement > 0)
-        {
-            printf("Moyenne generale pour le departement %s: %.2f\n", departement_cherche, somme / nbEtudiantsDepartement);
-        }
-        else
-        {
-            printf("Aucun etudiant trouve dans le departement %s.\n", departement_cherche);
-        }
-
         printf("---------------------------------------------\n");
+        for (int i = 0; i < dep_conteur; i++)
+        {
+            float moyenne_departement = somme_par_departement[i] / nombre_etudiants_par_departement[i];
+            printf("Moyenne generale pour le departement %s: %.2f\n", list_of_departements[i], moyenne_departement);
+        }
 
-        printf("et la Moyenne generale de l'universite est: %.2f\n", somme_total / *nombre_etudiants);
+        // Afficher la moyenne générale de l'université
+        printf("---------------------------------------------\n");
+        printf("Moyenne generale de l'universite: %.2f\n", somme_total / *nombre_etudiants);
         printf("---------------------------------------------\n");
     }
 }
@@ -195,6 +206,7 @@ void statistiques(Etudiant e[], int *nombre_etudiants)
         printf("Aucun Etudiant disponible.\n");
     }
     else
+
     {
         printf("--------------------------\n");
         printf("Voulez-vous :\n");
@@ -225,23 +237,21 @@ void statistiques(Etudiant e[], int *nombre_etudiants)
 
             for (int i = 0; i < *nombre_etudiants; i++)
             {
-                int found = 0;
+                int j;
 
-                for (int j = 0; j < dep_conteur; j++)
+                for (j = 0; j < dep_conteur; j++)
                 {
                     if (strcmp(e[i].departement, list_of_departements[j]) == 0)
                     {
                         nombre_etudiant_dans_dep[j]++;
-                        found = 1;
                         break;
                     }
                 }
 
-                if (!found)
+                if (j == dep_conteur)
                 {
                     strcpy(list_of_departements[dep_conteur], e[i].departement);
-                    nombre_etudiant_dans_dep[dep_conteur]++;
-                    dep_conteur++;
+                    nombre_etudiant_dans_dep[dep_conteur++] = 1;
                 }
             }
 
@@ -274,7 +284,7 @@ void statistiques(Etudiant e[], int *nombre_etudiants)
         // Afficher les 3 étudiants ayant les meilleures notes.
         else if (choix == 4)
         {
-            Etudiant top3[3] = {{.note = 0}, {.note = 0}, {.note = 0}}; // Array for top 3 students
+            Etudiant top3[3] = {{.note = 0}, {.note = 0}, {.note = 0}};
             for (int i = 0; i < *nombre_etudiants; i++)
             {
                 if (e[i].note > top3[2].note)
@@ -304,6 +314,35 @@ void statistiques(Etudiant e[], int *nombre_etudiants)
         }
         else if (choix == 5)
         {
+            char list_de_departements[100][50];
+            int nombre_etudiant_reussi_dans_dep[100] = {0};
+            int dep_conteur = 0;
+            for (int i = 0; i < *nombre_etudiants; i++)
+            {
+                if (e[i].note >= 10)
+                {
+                    int j;
+                    for (j = 0; j < dep_conteur; j++)
+                    {
+                        if (strcmp(e[i].departement, list_de_departements[j]) == 0)
+                        {
+                            nombre_etudiant_reussi_dans_dep[j]++;
+                            break;
+                        }
+                    }
+                    if (j == dep_conteur) // Nouveau département trouvé
+                    {
+                        strcpy(list_de_departements[dep_conteur], e[i].departement);
+                        nombre_etudiant_reussi_dans_dep[dep_conteur++] = 1;
+                    }
+                }
+            }
+
+            for (int i = 0; i < dep_conteur; i++)
+            {
+                printf("Departement: %s - Nombre d'etudiants ayant reussi : %d\n", list_de_departements[i], nombre_etudiant_reussi_dans_dep[i]);
+            }
+            printf("---------------------------------------------\n");
         }
         else
         {
